@@ -3,7 +3,7 @@ const Util = require('./util');
 
 const DEFAULTS = {
   COLOR: 'rgb(46.4%, 36.1%, 20.4%)',
-  RADIUS: 80
+  RADIUS: 20
 }
 
 function Asteroid(options) {
