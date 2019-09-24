@@ -1,0 +1,31 @@
+{
+  "name": "Asteroids",
+  "version": "1.0.0",
+  "description": "An Asteroids game",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "webpack --watch --mode=development",
+    "flow": "flow"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fwep/Asteroids.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fwep/Asteroids/issues"
+  },
+  "homepage": "https://github.com/Fwep/Asteroids#readme",
+  "dependencies": {
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/preset-flow": "^7.0.0",
+    "flow-bin": "^0.108.0"
+  }
+}
