@@ -1,11 +1,10 @@
-[ignore]
-
 [include]
+./src
+
+[ignore]
 
 [libs]
 
 [lints]
 
 [options]
-
-[strict]
