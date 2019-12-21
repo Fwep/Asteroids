@@ -1,20 +1,31 @@
-const Util = require('./util');
-const MovingObject = require('./moving_object');
-const Asteroid = require('./asteroid');
+// @flow
+import {type Options} from './moving_object'
+import {MovingObject} from './moving_object';
+import Util from './util';
+import Asteroid from './asteroid'
 
-function Bullet(options) {
-  options.color = Bullet.COLOR;
-  options.radius = Bullet.RADIUS;
-  options.vel = Util.scale(Util.direction(options.vel), 10);
+class Bullet extends MovingObject {
+  static COLOR: string;
+  static RADIUS: number;
+  static SPEED: number;
+  static isWrappable: false;
 
-  MovingObject.call(this, options);
+  constructor(options: Options) {
+    options.color = Bullet.COLOR;
+    options.radius = Bullet.RADIUS;
+    options.vel = Util.scale(Util.direction(options.vel), 10);
+    options.isWrappable = Bullet.isWrappable;
+
+    super(options);
+    this.name = "Bullet";
+  }
 }
 
-Bullet.COLOR = 'yellow';
+Bullet.COLOR = "yellow";
 Bullet.RADIUS = 10;
 Bullet.SPEED = 10;
+Bullet.isWrappable = false;
 
-Util.inherits(Bullet, MovingObject);
 
 // Commenting this back in causes righthand since of instanceof is not callable bug
 // Bullet.prototype.collideWith = function(obj) {
@@ -25,6 +36,4 @@ Util.inherits(Bullet, MovingObject);
 //   }
 // }
 
-Bullet.prototype.isWrappable = false;
-
-module.exports = Bullet;
+export default Bullet;

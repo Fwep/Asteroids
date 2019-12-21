@@ -1,13 +1,17 @@
-const MovingObject = require('./moving_object');
-const Asteroid = require('./asteroid');
-const Game = require('./game');
-const GameView = require('./game_view');
-const Ship = require('./ship');
+// @flow
+import {MovingObject} from './moving_object';
+import Asteroid from './asteroid';
+import Game from './game';
+import GameView from './game_view';
+import Ship from './ship';
 
+console.log("Index file loading properly");
 document.addEventListener('DOMContentLoaded', () => {
-  let canvas = document.getElementById('game-canvas');
+  let canvas: any = document.getElementById('game-canvas');
   let ctx = canvas.getContext('2d');
-  window.ctx = ctx;
+  let gameView = new GameView(ctx);
+  gameView.start();
+  return Promise.resolve("Dummy response to keep console quiet");
 });
 
 window.MovingObject = MovingObject;

@@ -1,29 +1,34 @@
-const MovingObject = require('./moving_object');
-const Util = require('./util');
-const Ship = require('./ship');
-const Bullet = require('./bullet')
+// @flow
+import type {Options} from './moving_object';
+import {MovingObject} from './moving_object';
+import Game from './game';
+import Util from './util';
+import Ship from './ship';
+import Bullet from './bullet';
 
 const DEFAULTS = {
-  COLOR: 'rgb(46.4%, 36.1%, 20.4%)',
-  RADIUS: 20
+  COLOR: 'yellow ',
+  RADIUS: 20,
+  SPEED: 3
 }
 
-function Asteroid(options) {
-  options.color = DEFAULTS.COLOR;
-  options.radius = DEFAULTS.RADIUS; 
-  options.vel = Util.randomVec(2);
+export default class Asteroid<T: Options> extends MovingObject {
+  constructor(options: T) {
+    options = options || {};
+    options.color = DEFAULTS.COLOR;
+    options.pos = options.pos || options.game.randomPosition();
+    options.radius = DEFAULTS.RADIUS;
+    options.vel = options.vel || Util.randomVec(DEFAULTS.SPEED);
+    options.isWrappable = true;
 
-  MovingObject.call(this, options);
-}
+    super(options);
+  }
 
-Util.inherits(Asteroid, MovingObject);
-
-Asteroid.prototype.collideWith = function(otherObject) {
-  if (otherObject instanceof Ship) {
-    otherObject.relocate();
-  } else if (otherObject instanceof Bullet) {
-    this.game.remove(this);
+  collideWith(otherObject: MovingObject) {
+    if (otherObject instanceof Ship) {
+      otherObject.relocate();
+    } else if (otherObject instanceof Bullet) {
+      this.game.remove(this);
+    }
   }
 }
-
-module.exports = Asteroid;
