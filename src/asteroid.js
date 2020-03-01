@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 import type {Options} from './moving_object';
 import {MovingObject} from './moving_object';
 import Game from './game';
@@ -7,14 +7,13 @@ import Ship from './ship';
 import Bullet from './bullet';
 
 const DEFAULTS = {
-  COLOR: 'yellow ',
+  COLOR: 'yellow',
   RADIUS: 20,
-  SPEED: 3
+  SPEED: 1
 }
 
 export default class Asteroid<T: Options> extends MovingObject {
   constructor(options: T) {
-    options = options || {};
     options.color = DEFAULTS.COLOR;
     options.pos = options.pos || options.game.randomPosition();
     options.radius = DEFAULTS.RADIUS;

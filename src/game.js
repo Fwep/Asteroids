@@ -1,8 +1,8 @@
-// @flow
+// @flow strict
 import Asteroid from "./asteroid";
-import {type Options} from './moving_object';
-import {MovingObject} from "./moving_object";
-import Ship from './ship';
+import { type Options } from "./moving_object";
+import { MovingObject } from "./moving_object";
+import Ship from "./ship";
 import Bullet from "./bullet";
 
 const DEFAULTS = {
@@ -12,9 +12,10 @@ const DEFAULTS = {
 };
 
 export default class Game {
-  asteroids: Array<?Asteroid>;
+  asteroids: Array<?Asteroid<Options>>;
   bullets: Array<?Bullet>;
   isWrappable: false;
+  remove: ((MovingObject) => void);
   ship: Ship<Options>;
 
   constructor() {
@@ -56,18 +57,18 @@ export default class Game {
     }
   }
 
-  draw(ctx): void {
+  draw(ctx: any): void {
     ctx.clearRect(0, 0, DEFAULTS.DIM_X, DEFAULTS.DIM_Y);
     const img = document.getElementById("source");
     ctx.drawImage(img, 0, 0, DEFAULTS.DIM_X, DEFAULTS.DIM_Y);
-    this.allObjects().forEach((obj) => obj.draw(ctx));
+    this.allObjects().forEach(obj => obj.draw(ctx));
   }
 
   isOutOfBounds(pos: [number, number]): boolean {
     return pos[0] > DEFAULTS.DIM_X || pos[1] > DEFAULTS.DIM_Y;
   }
 
-  moveObjects(delta): void {
+  moveObjects(delta: number): void {
     this.allObjects().forEach(obj => obj.move(delta));
   }
 
@@ -77,7 +78,7 @@ export default class Game {
     return [randX, randY];
   }
 
-  remove(obj): void {
+  remove(obj: MovingObject): void {
     if (obj instanceof Asteroid) {
       this.asteroids.splice(this.asteroids.indexOf(obj), 1);
     } else if (obj instanceof Bullet) {
@@ -85,7 +86,7 @@ export default class Game {
     }
   }
 
-  step(ctx) {
+  step(ctx: any) {
     this.moveObjects(ctx);
     this.checkCollisions();
   }

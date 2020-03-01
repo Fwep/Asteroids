@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 import {type Options} from './moving_object'
 import {MovingObject} from './moving_object';
 import Util from './util';
@@ -17,7 +17,6 @@ class Bullet extends MovingObject {
     options.isWrappable = Bullet.isWrappable;
 
     super(options);
-    this.name = "Bullet";
   }
 }
 

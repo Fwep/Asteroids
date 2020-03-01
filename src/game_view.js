@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 import Ship from "./ship";
 import Game from "./game";
 
@@ -7,7 +7,7 @@ export default class GameView {
   ctx: any;
   lastTime: number = 0;
 
-  constructor(ctx) {
+  constructor(ctx: any) {
     this.game = new Game();
     this.ctx = ctx;
     this.lastTime;

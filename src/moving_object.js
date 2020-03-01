@@ -1,20 +1,20 @@
-// @flow
+// @flow strict
 import Util from './util';
 import typeof Game from './game';
 
 export type Options = {
-  color: string,
+  color?: string,
   game: Game,
-  isWrappable: boolean,
+  isWrappable?: boolean,
   radius: number,
   pos: [number, number],
   vel: [number, number],
 }
 
 export class MovingObject {
-  color: string;
+  color: ?string;
   game: Game;
-  isWrappable: boolean;
+  isWrappable: ?boolean;
   radius: number;
   pos: [number, number];
   vel: [number, number];
@@ -33,7 +33,7 @@ export class MovingObject {
   draw(ctx: any): void {
     ctx.fillStyle = this.color;
     ctx.beginPath();
-    let [x, y]: [number, number] = [this.pos[0], this.pos[1]];
+    let [x, y] = [this.pos[0], this.pos[1]];
     ctx.arc(x, y, this.radius, 0, 2 * Math.PI);
     ctx.fill();
   }
@@ -44,8 +44,8 @@ export class MovingObject {
   }
 
   move(timeDelta: number = 1): void {
-    let [posX, posY]: [number, number] = [this.pos[0], this.pos[1]];
-    let [velX, velY]: [number, number] = [this.vel[0], this.vel[1]];
+    let [posX, posY] = [this.pos[0], this.pos[1]];
+    let [velX, velY] = [this.vel[0], this.vel[1]];
     let newPos = [posX + (velX*timeDelta/20), posY + (velY*timeDelta/20)];
     
     if (this.game.isOutOfBounds(newPos)) {
