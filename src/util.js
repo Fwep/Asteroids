@@ -1,4 +1,4 @@
-// @flow
+// @flow strict
 const Util = {
   direction: function direction(vec: [number, number]): [number, number] {
     if (Math.abs(vec[0]) > 1) vec[0] /= vec[0];
